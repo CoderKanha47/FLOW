@@ -52,17 +52,35 @@ async def handle_webhook(
             content={"error": "Invalid webhook secret"},
         )
 
-    body = {}
+    raw_body = await request.body()
     content_type = request.headers.get("content-type", "")
-    if "json" in content_type:
-        try:
-            body = await request.json()
-        except Exception:  # noqa: BLE001
-            body = {}
-    else:
-        raw = (await request.body()).decode("utf-8", errors="ignore")
-        if raw:
-            body = {"body": raw}
+    decoded_body = raw_body.decode("utf-8", errors="replace")
+    logger.info(
+        "Webhook raw request: workflow_id=%s content_type=%s body_length=%s raw_body=%r",
+        workflow_id,
+        content_type,
+        len(raw_body),
+        decoded_body[:2000],
+    )
+
+    body = {}
+    if raw_body:
+        if "json" in content_type.lower():
+            try:
+                body = json.loads(decoded_body)
+            except json.JSONDecodeError as exc:
+                logger.error(
+                    "Webhook JSON parse failed: workflow_id=%s error=%s raw_body=%r",
+                    workflow_id,
+                    exc,
+                    decoded_body[:2000],
+                )
+                return JSONResponse(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    content={"error": "Invalid JSON body"},
+                )
+        else:
+            body = {"body": decoded_body}
 
     if not isinstance(body, dict):
         body = {"data": body}
