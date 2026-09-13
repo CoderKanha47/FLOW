@@ -1,0 +1,26 @@
+# Python
+**/__pycache__/
+*.py[cod]
+backend/.venv/
+backend/.pytest_cache/
+backend/*.db
+backend/*.sqlite3
+backend/.env
+
+# Secrets
+groq.txt
+
+# Node
+frontend/node_modules/
+frontend/.next/
+frontend/.env.local
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Misc
+*.log
+
+# Runtime files
+*.pid
