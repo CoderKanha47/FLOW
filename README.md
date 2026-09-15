@@ -1,6 +1,9 @@
-# Flow
+# FLOW
 
 A visual, extensible workflow/application builder. Compose triggers, logic, data/API integrations, and AI nodes into executable workflows on a canvas.
+
+LiveDemo: https://flow-three-pi.vercel.app/workflows
+Repository: https://github.com/CoderKanha47/FLOW
 
 ## Stack
 
