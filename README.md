@@ -1,5 +1,5 @@
 # FLOW
-
+<img width="1866" height="948" alt="FLOW-Demo2_ThumbNail" src="https://github.com/user-attachments/assets/7f78c56c-bb3e-40e5-bb78-6d502f42ee9a" />
 A visual, extensible workflow/application builder. Compose triggers, logic, data/API integrations, and AI nodes into executable workflows on a canvas.
 
 LiveDemo: https://flow-three-pi.vercel.app/workflows <br>
